@@ -8,7 +8,7 @@ import hashlib
 from .compat import validator, root_validator, Field, PYD_VERSION, get_pyd_field_names, get_pyd_dict, pyd_parse_obj, get_pyd_schema
 from .compat import BaseSettings as _BaseSettings
 from .compat import BaseModel as _BaseModel
-from pydantic.networks import AnyUrl, Url, MultiHostUrl
+from pydantic.networks import AnyUrl
 
 
 Parts = typing.Dict[str, typing.Union[str, int, None]]
@@ -438,7 +438,7 @@ _ALLOWED_SCHEMES = [
 if PYD_VERSION == 2:
     from pydantic.networks import UrlConstraints
     KeyDBDsn = typing.Annotated[
-        Url, 
+        AnyUrl,
         UrlConstraints(
             allowed_schemes = _ALLOWED_SCHEMES,
             default_host='localhost',
