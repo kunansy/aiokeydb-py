@@ -23,6 +23,7 @@ requirements = [
     "anyio",
     "croniter",
     "tenacity",
+    "dill==0.3.9",
     # "hiredis",
 ]
 
