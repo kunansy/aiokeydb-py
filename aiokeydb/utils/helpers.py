@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import anyio
 import inspect
 import logging
@@ -147,7 +149,9 @@ def create_retryable_client(
 #     return sess
 
 # Any version above this may not support the async contextmanager
-if float(version('anyio').rsplit('.', 1)[0]) >= 3.8:
+anyio_vers = version("anyio")
+vers_match = re.match(r"^\d+\.\d+", anyio_vers)
+if float(anyio_vers[slice(*vers_match.span())]) >= 3.8:
     @contextlib.asynccontextmanager
     async def afail_after(
         delay: Optional[float] = None,
